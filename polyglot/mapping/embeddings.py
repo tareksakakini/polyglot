@@ -120,6 +120,26 @@ class Embedding(object):
     distances = np.linalg.norm(diff, axis=1)
     top_ids = distances.argsort()[1:top_k+1]
     return [self.vocabulary.id_word[i] for i in top_ids]
+    
+  def analogy(self, wordpos1, wordpos2, wordneg, top_k=10):
+    """Return the nearest k words to the given `word`.
+
+    Args:
+      word (string): single word.
+      top_k (integer): decides how many neighbors to report.
+
+    Returns:
+      A list of words sorted by the distances. The closest is the first.
+
+    Note:
+      L2 metric is used to calculate distances.
+    """
+    #TODO(rmyeid): Use scikit ball tree, if scikit is available
+    point = self[wordpos1] + self[wordpos2] - self[wordneg]
+    diff = self.vectors - point
+    distances = np.linalg.norm(diff, axis=1)
+    top_ids = distances.argsort()[1:top_k+1]
+    return [self.vocabulary.id_word[i] for i in top_ids]
 
   def distances(self, word, words):
     """Calculate eucledean pairwise distances between `word` and `words`.
