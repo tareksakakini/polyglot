@@ -197,6 +197,7 @@ class Embedding(object):
     diff = vectors - point
     distances = np.linalg.norm(diff, axis=1)
     print point
+    print np.dot(point, diff)
     return distances
 
   @staticmethod
