@@ -202,7 +202,7 @@ class Embedding(object):
     #print "hello"
     
     #print np.dot(point, diff[0])
-    return np.dot(point, diff)/(np.linalg.norm(point, axis=1)*np.linalg.norm(diff, axis=1))
+    return np.dot(point, diff)/(np.linalg.norm(point)*np.linalg.norm(diff))
 
   @staticmethod
   def from_gensim(model):
