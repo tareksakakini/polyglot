@@ -160,6 +160,7 @@ class Embedding(object):
     diff = vectors - point
     distances = np.linalg.norm(diff, axis=1)
     return distances
+    
 
   def distances_analogy(self, word1pos, word2pos, wordneg, words):
     """Calculate eucledean pairwise distances between `word` and `words`.
@@ -194,15 +195,14 @@ class Embedding(object):
 
     point = self[word1pos] + self[word2pos] - self[wordneg] 
     vectors = np.asarray([self[w] for w in words])
-    diff = vectors - point
-    diff = diff[0]
+    vector1 = vectors[0]
     #distances = np.linalg.norm(diff, axis=1)
     #print point,diff[0]
     #print type(point),type(diff[0])
     #print "hello"
     
     #print np.dot(point, diff[0])
-    return np.dot(point, diff)/(np.linalg.norm(point)*np.linalg.norm(diff))
+    return np.dot(point, vector1)/(np.linalg.norm(point)*np.linalg.norm(vector1))
 
   @staticmethod
   def from_gensim(model):
