@@ -180,6 +180,24 @@ class Embedding(object):
     diff = vectors - point
     distances = np.linalg.norm(diff, axis=1)
     return distances
+    
+  def cos_distances_analogy(self, word1pos, word2pos, wordneg, words):
+    """Calculate eucledean pairwise distances between `word` and `words`.
+    Args:
+      word (string): single word.
+      words (list): list of strings.
+    Returns:
+      numpy array of the distances.
+    Note:
+      L2 metric is used to calculate distances.
+    """
+
+    point = self[word1pos] + self[word2pos] - self[wordneg] 
+    vectors = np.asarray([self[w] for w in words])
+    diff = vectors - point
+    distances = np.linalg.norm(diff, axis=1)
+    print point
+    return distances
 
   @staticmethod
   def from_gensim(model):
