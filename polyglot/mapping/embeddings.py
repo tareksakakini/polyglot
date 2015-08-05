@@ -196,7 +196,10 @@ class Embedding(object):
     vectors = np.asarray([self[w] for w in words])
     diff = vectors - point
     distances = np.linalg.norm(diff, axis=1)
-    print point
+    print point,diff
+    print type(point),type(diff)
+    print "hello"
+    
     print np.dot(point, diff)
     return distances
 
